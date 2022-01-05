@@ -19,7 +19,7 @@ public class BeerController {
     }
 
     @PostMapping
-    private ResponseEntity<BeerDto> saveNewBeer(@RequestBody final BeerDto beerDto) {
+    public ResponseEntity<BeerDto> saveNewBeer(@RequestBody final BeerDto beerDto) {
 
         //todo impl
         return new ResponseEntity<>(HttpStatus.CREATED);
