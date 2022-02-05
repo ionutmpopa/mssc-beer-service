@@ -1,7 +1,6 @@
 package guru.springframework.msscbeerservice.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import guru.springframework.msscbeerservice.domain.Beer;
 import guru.springframework.msscbeerservice.service.BeerService;
 import guru.springframework.msscbeerservice.web.model.BeerDto;
 import guru.springframework.msscbeerservice.web.model.BeerStyleEnum;
@@ -19,11 +18,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
@@ -49,7 +47,7 @@ class BeerControllerTest {
     @Test
     void getBeerById() throws Exception {
 
-        when(beerService.getById(any())).thenReturn(getDefaultBeer());
+        when(beerService.getById(any(), anyBoolean())).thenReturn(getDefaultBeer());
 
         mockMvc.perform(get("/api/v1/beer/{beerId}", UUID.randomUUID())
                 .param("isCold", "yes")
@@ -71,7 +69,7 @@ class BeerControllerTest {
                     fieldWithPath("beerStyle").description("Beer Style"),
                     fieldWithPath("upc").description("UPC of beer"),
                     fieldWithPath("price").description("Price"),
-                    fieldWithPath("quantityOnHand").description("Quantity On Hand")
+                    fieldWithPath("quantityToBrew").description("Quantity On Hand")
                 )));
 
     }
@@ -97,7 +95,7 @@ class BeerControllerTest {
                     fields.withPath("beerStyle").description("Beer Style"),
                     fields.withPath("upc").description("UPC of beer"),
                     fields.withPath("price").description("Price"),
-                    fields.withPath("quantityOnHand").description("Quantity On Hand")
+                    fields.withPath("quantityToBrew").description("Quantity On Hand")
                 )));
     }
 
@@ -117,7 +115,7 @@ class BeerControllerTest {
             .beerName("Ursus")
             .beerStyle(BeerStyleEnum.PALE_ALE)
             .price(new BigDecimal("11.25"))
-            .quantityOnHand(5)
+            .quantityToBrew(5)
             .upc(5L)
             .build();
     }
@@ -128,7 +126,7 @@ class BeerControllerTest {
             .beerStyle(BeerStyleEnum.ALE)
             .upc(1234567L)
             .price(new BigDecimal("0.00"))
-            .quantityOnHand(5)
+            .quantityToBrew(5)
             .build();
     }
 

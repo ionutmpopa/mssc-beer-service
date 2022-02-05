@@ -33,16 +33,20 @@ public class Beer {
     private Timestamp createdDate;
 
     @UpdateTimestamp
-    private Timestamp lastModifiedName;
+    private Timestamp lastModifiedDate;
 
     private String beerName;
+
+    @Enumerated(EnumType.STRING)
     private BeerStyleEnum beerStyle;
 
     @Column(unique = true)
     private Long upc;
 
     private BigDecimal price;
+
     private Integer minOnHand;
+
     private Integer quantityToBrew;
 
 }
