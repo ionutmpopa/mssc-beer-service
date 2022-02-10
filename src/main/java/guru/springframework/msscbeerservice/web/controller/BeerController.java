@@ -29,11 +29,7 @@ public class BeerController {
                                                    @RequestParam(value = "pageSize", required = false) Integer pageSize,
                                                    @RequestParam(value = "beerName", required = false) String beerName,
                                                    @RequestParam(value = "beerStyle", required = false) BeerStyleEnum beerStyle,
-                                                   @RequestParam(value = "showInventoryOnHand", required = false) Boolean showInventoryOnHand) {
-
-        if (showInventoryOnHand == null) {
-            showInventoryOnHand = false;
-        }
+                                                   @RequestParam(value = "showInventoryOnHand", required = false) boolean showInventoryOnHand) {
 
         if (pageNumber == null || pageNumber < 0) {
             pageNumber = DEFAULT_PAGE_NUMBER;
@@ -50,12 +46,14 @@ public class BeerController {
 
     @GetMapping("beer/{beerId}")
     public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId,
-                                               @RequestParam(value = "showInventoryOnHand", required = false) Boolean showInventoryOnHand) {
-        if (showInventoryOnHand == null) {
-            showInventoryOnHand = false;
-        }
-
+                                               @RequestParam(value = "showInventoryOnHand", required = false) boolean showInventoryOnHand) {
         return new ResponseEntity<>(beerService.getById(beerId, showInventoryOnHand), HttpStatus.OK);
+    }
+
+    @GetMapping("beer/{upc}/upc")
+    public ResponseEntity<BeerDto> getBeerByUpc(@PathVariable("upc") final String upc,
+                                               @RequestParam(value = "showInventoryOnHand", required = false) boolean showInventoryOnHand) {
+        return new ResponseEntity<>(beerService.getByUpc(upc, showInventoryOnHand), HttpStatus.OK);
     }
 
     @PostMapping(path = "beer")

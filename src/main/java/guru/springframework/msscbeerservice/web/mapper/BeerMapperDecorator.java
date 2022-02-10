@@ -1,25 +1,35 @@
 package guru.springframework.msscbeerservice.web.mapper;
 
 import guru.springframework.msscbeerservice.domain.Beer;
+import guru.springframework.msscbeerservice.service.inventory.BeerInventoryService;
 import guru.springframework.msscbeerservice.web.model.BeerDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 
-@Component
 public abstract class BeerMapperDecorator implements BeerMapper {
 
-
-    private final BeerMapper beerMapper;
+    private BeerInventoryService beerInventoryService;
+    private BeerMapper beerMapper;
 
     @Autowired
-    protected BeerMapperDecorator(@Qualifier("beerMapperImpl") BeerMapper beerMapper) {
-        this.beerMapper = beerMapper;
+    public void setBeerInventoryService(BeerInventoryService beerInventoryService) {
+        this.beerInventoryService = beerInventoryService;
+    }
+
+    @Autowired
+    public void setMapper(BeerMapper mapper) {
+        this.beerMapper = mapper;
     }
 
     @Override
     public BeerDto beerToBeerDto(Beer beer) {
         return beerMapper.beerToBeerDto(beer);
+    }
+
+    @Override
+    public BeerDto beerToBeerDtoWithInventory(Beer beer) {
+        BeerDto dto = beerMapper.beerToBeerDto(beer);
+        dto.setQuantityToBrew(beerInventoryService.getOnHandInventory(beer.getId()));
+        return dto;
     }
 
     @Override

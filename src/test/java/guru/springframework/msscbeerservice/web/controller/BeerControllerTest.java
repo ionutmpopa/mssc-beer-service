@@ -116,7 +116,7 @@ class BeerControllerTest {
             .beerStyle(BeerStyleEnum.PALE_ALE)
             .price(new BigDecimal("11.25"))
             .quantityToBrew(5)
-            .upc(5L)
+            .upc("5")
             .build();
     }
 
@@ -124,7 +124,7 @@ class BeerControllerTest {
         return BeerDto.builder()
             .beerName("Name")
             .beerStyle(BeerStyleEnum.ALE)
-            .upc(1234567L)
+            .upc("1234567")
             .price(new BigDecimal("0.00"))
             .quantityToBrew(5)
             .build();
