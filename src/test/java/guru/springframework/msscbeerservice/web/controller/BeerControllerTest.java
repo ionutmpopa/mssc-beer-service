@@ -69,7 +69,7 @@ class BeerControllerTest {
                     fieldWithPath("beerStyle").description("Beer Style"),
                     fieldWithPath("upc").description("UPC of beer"),
                     fieldWithPath("price").description("Price"),
-                    fieldWithPath("quantityToBrew").description("Quantity On Hand")
+                    fieldWithPath("quantityOnHand").description("Quantity On Hand")
                 )));
 
     }
@@ -95,7 +95,7 @@ class BeerControllerTest {
                     fields.withPath("beerStyle").description("Beer Style"),
                     fields.withPath("upc").description("UPC of beer"),
                     fields.withPath("price").description("Price"),
-                    fields.withPath("quantityToBrew").description("Quantity On Hand")
+                    fields.withPath("quantityOnHand").description("Quantity On Hand")
                 )));
     }
 
@@ -115,7 +115,7 @@ class BeerControllerTest {
             .beerName("Ursus")
             .beerStyle(BeerStyleEnum.PALE_ALE)
             .price(new BigDecimal("11.25"))
-            .quantityToBrew(5)
+            .quantityOnHand(5)
             .upc("5")
             .build();
     }
@@ -126,7 +126,7 @@ class BeerControllerTest {
             .beerStyle(BeerStyleEnum.ALE)
             .upc("1234567")
             .price(new BigDecimal("0.00"))
-            .quantityToBrew(5)
+            .quantityOnHand(5)
             .build();
     }
 

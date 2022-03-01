@@ -17,7 +17,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Slf4j
-@Profile("localmysql")
+@Profile("!local-discovery")
 @ConfigurationProperties(prefix = "sfg.brewery", ignoreUnknownFields = false)
 @Component
 public class BeerInventoryServiceRestTemplate implements BeerInventoryService {
