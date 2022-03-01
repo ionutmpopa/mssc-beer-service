@@ -48,6 +48,6 @@ public class BeerDto implements Serializable {
     private BigDecimal price;
 
     @Positive
-    private Integer quantityToBrew;
+    private Integer quantityOnHand;
 
 }
